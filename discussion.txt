@@ -1,0 +1,9 @@
+
+
+
+TODO:
+  use it?
+
+  -show summary in front page listing
+  -give me a special view -- edit anything I guess
+  -make a repository for this stuff

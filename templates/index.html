@@ -14,7 +14,7 @@ Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kal
 <li>
 # if commission.commissioner == you.id or you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
   <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/262540612749352" class="buybutton" method="post" name="BB_BuyButtonForm">
-    <input name="item_name_1" type="hidden" value="Drawing for {{commission.commissioner_name}}"/>
+    <input name="item_name_1" type="hidden" value="Drawing for {{commission.commissioner_name}} (id:{{commission.id}})"/>
     <input name="item_description_1" type="hidden" value="{{commission.summary}}"/>
     <input name="item_quantity_1" type="hidden" value="1"/>
     <input name="item_price_1" type="hidden" value="{{commission.price}}"/>
@@ -27,7 +27,7 @@ Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kal
     <input type="hidden" name="cmd" value="_xclick">
     <input type="hidden" name="business" value="7TWUV9UHC8B38">
     <input type="hidden" name="lc" value="GB">
-    <input type="hidden" name="item_name" value="Drawing for {{commission.commissioner_name}}: {{commission.summary}}">
+    <input type="hidden" name="item_name" value="Drawing for {{commission.commissioner_name}}: {{commission.summary}} (id:{{commission.id}})">
     <input type="hidden" name="amount" value="{{commission.price}}">
     <input type="hidden" name="currency_code" value="USD">
     <input type="hidden" name="tax_rate" value="0.000">
