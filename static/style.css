@@ -1,0 +1,18 @@
+html {font-family:helvetica;}
+#main {margin:2ex;}
+textarea, #summary {width:99%; padding:.5ex;}
+textarea, input[type=text] {font:inherit;}
+dt {margin-top:1em; margin-bottom:.5ex; }
+dd {margin:-.5ex;}
+.error {color:red;}
+#characters, #mood {height:8em;}
+
+.price {font-size:1.5em;}
+.price input {width:5em;}
+
+h1,h2 {margin-top:1ex;}
+.buybutton input {vertical-align:middle;}
+form {display:inline;}
+#logout-form, #login-form {display:inline;}
+
+p {margin-top:1ex;}

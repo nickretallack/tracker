@@ -1,0 +1,22 @@
+# extends 'base.html'
+# block body
+<h1>New Commission</h1>
+<form action="{{action}}" method="post">
+  <dl>
+    <dt><label for="price">Name your price.  Anything over five dollars and within reason is fine.  I'll make my work worth it.</label></dt>
+    <dd class="price">$<input type="text" name="price" id="price" value="{{commission.price}}"> <span class="error">{{error}}</span></dd>
+    <dt><label for="summary">Give a short public summary of what you want.</label></dt>
+    <dd><input type="text" name="summary" id="summary" value="{{commission.summary}}"></dd>
+    <dt><label for="characters">Describe your characters.  What are their names, species, key details, 
+      and personalities?  Paste links to references.</label></dt>
+    <dd><textarea name="characters" id="characters">{{commission.characters}}</textarea></dd>
+    <dt><label for="mood">What would you like me to draw?  Describe the situation, positions, and mood.  You can ask for a series of drawings.</label></dt>
+    <dd><textarea name="mood" id="mood">{{commission.mood}}</textarea></dd>
+    <dt><label for="important">What are the most important things, which, if I forgot, you would care enough to complain about?</label></dt>
+    <dd><textarea name="important" id="important">{{commission.important}}</textarea></dd>
+    <dt><label for="rating">How kid-friendly should it be?  G-rated, tasteful nudity, explicit, multiple versions...</label></dt>
+    <dd><textarea name="rating" id="rating">{{commission.rating}}</textarea></dd>
+    <dt><button type="submit">Post It</button></dt>
+  </dl>
+</form>
+# endblock
