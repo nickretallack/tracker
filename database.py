@@ -22,7 +22,7 @@ function(doc){
 map_commissions = """
 function(doc){
   if(doc.type == "commission"){
-    emit(doc.price, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id})
+    emit(doc.price, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id,"summary":doc.summary})
   }
 }"""
 

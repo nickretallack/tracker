@@ -11,14 +11,11 @@ Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kal
 <h2>Commissions To Do</h2>
 <ul>
 # for commission in commissions
-<li>{{commission.commissioner_name}} for ${{commission.price}}
-
-# if commission.commissioner == you.id
-<a href="/{{commission.id}}">[edit]</a>
-
+<li>
+# if commission.commissioner == you.id or you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
   <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/262540612749352" class="buybutton" method="post" name="BB_BuyButtonForm">
-    <input name="item_name_1" type="hidden" value="Drawing"/>
-    <input name="item_description_1" type="hidden" value="One commissioned work of art."/>
+    <input name="item_name_1" type="hidden" value="Drawing for {{commission.commissioner_name}}"/>
+    <input name="item_description_1" type="hidden" value="{{commission.summary}}"/>
     <input name="item_quantity_1" type="hidden" value="1"/>
     <input name="item_price_1" type="hidden" value="{{commission.price}}"/>
     <input name="item_currency_1" type="hidden" value="USD"/>
@@ -30,7 +27,7 @@ Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kal
     <input type="hidden" name="cmd" value="_xclick">
     <input type="hidden" name="business" value="7TWUV9UHC8B38">
     <input type="hidden" name="lc" value="GB">
-    <input type="hidden" name="item_name" value="Drawing">
+    <input type="hidden" name="item_name" value="Drawing for {{commission.commissioner_name}}: {{commission.summary}}">
     <input type="hidden" name="amount" value="{{commission.price}}">
     <input type="hidden" name="currency_code" value="USD">
     <input type="hidden" name="tax_rate" value="0.000">
@@ -38,11 +35,12 @@ Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kal
     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_SM.gif:NonHosted">
     <input type="image" src="https://www.paypal.com/en_GB/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal">
     <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-  </form>
-  
-  
-  
+  </form>  
+  <a href="/{{commission.id}}">[edit]</a>
 # endif    
+
+${{commission.price}} | {{commission.commissioner_name}} | {{commission.summary}}
+
   </li>
 # endfor
 </ul>
@@ -54,4 +52,6 @@ If you post a payment with google checkout, I will not charge it until your work
   bank account with them if you want your payment to go through.  Because of this hassle, I suggest you post payment first.
   I can refund you manually if necessary.  If I end up using this payment method a lot, I'll consider enabling credit card payments.
   It would cost 30 cents + 3% to accept any payments in that case.</p>
+<p>The buttons are smart enough to charge what you put down in the request, but not much more.
+  Please don't change the price or summary after paying.'</p>
 # endblock

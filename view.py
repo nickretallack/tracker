@@ -17,7 +17,8 @@ class form_view:
     return render("form", action="new", commission={}, you=auth.require_you())
 
   def POST(self):
-    record = {'type':'commission'}
+    you = auth.require_you()
+    record = {'type':'commission','commissioner':you.id}
 
     try:
       commission_ish(record)
@@ -33,7 +34,7 @@ class edit_view:
     if commission_id not in db:
       raise web.notfound()
     commission = db[commission_id]
-    if commission['commissioner'] != you.id:
+    if commission['commissioner'] != you.id and you['openids'] != ["xri://=!E68D.731D.F0A8.BFA8"]:
       raise web.notfound()
     
     #if web.openid.status() == "xri://=!E68D.731D.F0A8.BFA8":
@@ -45,7 +46,7 @@ class edit_view:
     if commission_id not in db:
       raise web.notfound()
     commission = db[commission_id]
-    if commission['commissioner'] != you.id:
+    if commission['commissioner'] != you.id and you['openids'] != ["xri://=!E68D.731D.F0A8.BFA8"]:
       raise web.notfound()
 
     try:
@@ -58,7 +59,7 @@ class edit_view:
 
 def commission_ish(record):
   you = auth.require_you()
-  fields = ['price','characters','mood','important','rating']
+  fields = ['price','summary','characters','mood','important','rating']
   params = web.input()
   for field in fields:
     if field in params:
@@ -67,8 +68,6 @@ def commission_ish(record):
   record['price'] = float('0'+record['price'])
   if record['price'] < 5: raise ValueError
   if record['price'] > 500: raise ValueError
-  
-  record['commissioner'] = you.id
   return record
 
 

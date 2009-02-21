@@ -16,7 +16,7 @@
     <dd><textarea name="important" id="important">{{commission.important}}</textarea></dd>
     <dt><label for="rating">How kid-friendly should it be?  G-rated, tasteful nudity, explicit, multiple versions...</label></dt>
     <dd><textarea name="rating" id="rating">{{commission.rating}}</textarea></dd>
-    <dt><button type="submit">Post It</button></dt>
+    <dt><button type="submit">{% if action == "new" %}Post It{% else %}Save it{% endif %}</button></dt>
   </dl>
 </form>
 # endblock
