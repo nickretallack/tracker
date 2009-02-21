@@ -26,7 +26,6 @@ class settings_view:
     unique = True
     name = params['name']
     if name and name != you.get('name',None):
-      from helper import slugify
       slug = slugify(name)
       for row in dbview.users(db, startkey=slug, endkey=slug):
         if slug == row.key:
