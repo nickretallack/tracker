@@ -1,7 +1,7 @@
 # extends 'base.html'
 # block body
 <h1>New Commission</h1>
-<form action="{{action}}" method="post">
+<form action="{{action}}" method="post" enctype="multipart/form-data">
   <dl>
     <dt><label for="price">Name your price.  Anything over five dollars and within reason is fine.  I'll make my work worth it.</label></dt>
     <dd class="price">$<input type="text" name="price" id="price" value="{{commission.price}}"> <span class="error">{{error}}</span></dd>
@@ -16,7 +16,21 @@
     <dd><textarea name="important" id="important">{{commission.important}}</textarea></dd>
     <dt><label for="rating">How kid-friendly should it be?  G-rated, tasteful nudity, explicit, multiple versions...</label></dt>
     <dd><textarea name="rating" id="rating">{{commission.rating}}</textarea></dd>
-    <dt><button type="submit">{% if action == "new" %}Post It{% else %}Save it{% endif %}</button></dt>
-  </dl>
+# if you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
+    <dt><label for="file">File</label></dt>
+    <dt><input type="file" id='file' name='file' /></dt>    
+# endif
+    <dt>
+# if action == "new"
+<button type="submit" name="button" value="new">Post It</button>
+# else
+<button type="submit" name="button" value="save">Save It</button>
+<button type="submit" name="button" value="delete">{% if commission.deleted %}Un-{% endif %}Delete It</button>
+# if you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
+<button type="submit" name="button" value="finish">{% if commission.finished %}Un-{% endif %}Finished!</button>
+# endif
+# endif
+</dt>
+</dl>
 </form>
 # endblock

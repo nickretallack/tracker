@@ -5,45 +5,35 @@
 # if you
 <a href="/new">Post a Commission Request</a> and chat with Kalu about it on AIM (kalufurret).
 # else
-Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kalu, or chat with him on aim (kalufurret)
+Log in with <a href="http://openid.net">OpenID</a> if you want to commission Kalu, or chat with him on aim (kalufurret).
+You can log in with a variety of familiar services, like AIM and Livejournal.  My app will give you a random name
+to keep your login secret.  You can change it in Settings.
 # endif
 </p>
+
 <h2>Commissions To Do</h2>
 <ul>
 # for commission in commissions
-<li>
-# if commission.commissioner == you.id or you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
-  <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/262540612749352" class="buybutton" method="post" name="BB_BuyButtonForm">
-    <input name="item_name_1" type="hidden" value="Drawing for {{commission.commissioner_name}} (id:{{commission.id}})"/>
-    <input name="item_description_1" type="hidden" value="{{commission.summary}}"/>
-    <input name="item_quantity_1" type="hidden" value="1"/>
-    <input name="item_price_1" type="hidden" value="{{commission.price}}"/>
-    <input name="item_currency_1" type="hidden" value="USD"/>
-    <input name="_charset_" type="hidden" value="utf-8"/>
-    <input alt="" src="https://checkout.google.com/buttons/buy.gif?merchant_id=262540612749352&amp;w=121&amp;h=44&amp;style=trans&amp;variant=text&amp;loc=en_US" type="image"/>
-  </form>
-
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="7TWUV9UHC8B38">
-    <input type="hidden" name="lc" value="GB">
-    <input type="hidden" name="item_name" value="Drawing for {{commission.commissioner_name}}: {{commission.summary}} (id:{{commission.id}})">
-    <input type="hidden" name="amount" value="{{commission.price}}">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="tax_rate" value="0.000">
-    <input type="hidden" name="shipping" value="0.00">
-    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_SM.gif:NonHosted">
-    <input type="image" src="https://www.paypal.com/en_GB/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal">
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-  </form>  
-  <a href="/{{commission.id}}">[edit]</a>
-# endif    
-
-${{commission.price}} | {{commission.commissioner_name}} | {{commission.summary}}
-
-  </li>
+# include 'commission.html'
 # endfor
 </ul>
+
+<h2>Finished Commissions</h2>
+<ul>
+# for commission in finished
+# include 'commission.html'
+# endfor
+</ul>
+
+# if you.openids == ["xri://=!E68D.731D.F0A8.BFA8"]
+<h2>Deleted Commissions</h2>
+<ul>
+# for commission in deleted
+# include 'commission.html'
+# endfor
+</ul>
+# endif
+
 
 <h2>Notes about Payment Methods</h2>
 <p>The blue button is Google Checkout.  It only works for US Dollars.  They charge me 20 cents + 2% to accept your payment.
@@ -54,4 +44,10 @@ If you post a payment with google checkout, I will not charge it until your work
   It would cost 30 cents + 3% to accept any payments in that case.</p>
 <p>The buttons are smart enough to charge what you put down in the request, but not much more.
   Please don't change the price or summary after paying.'</p>
+<h2>Wtf is this OpenID shit?</h2>
+<p>Do you hate registering for things?  Well this time you don't have to.
+  Now you can log in with an account you've already registered elsewhere, like AIM, LiveJournal,
+  GMail, Yahoo, or Flickr.  I'll keep your identity a secret and just give you a random name when you log in.
+  And no, this wont give me your password or anything.  So just go log in already!</p>
+
 # endblock

@@ -21,8 +21,22 @@ function(doc){
 
 map_commissions = """
 function(doc){
-  if(doc.type == "commission"){
-    emit(doc.price, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id,"summary":doc.summary})
+  if(doc.type == "commission" && !doc.finished && !doc.deleted){
+    emit(doc.price, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id,"summary":doc.summary,"files":doc.files})
+  }
+}"""
+
+map_finished = """
+function(doc){
+  if(doc.type == "commission" && doc.finished && !doc.deleted){
+    emit(doc.finished, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id,"summary":doc.summary,"files":doc.files})
+  }
+}"""
+
+map_deleted = """
+function(doc){
+  if(doc.type == "commission" && doc.deleted){
+    emit(doc.deleted, {"price":doc.price,"commissioner":doc.commissioner,"id":doc._id,"summary":doc.summary,"files":doc.files})
   }
 }"""
 
@@ -32,8 +46,10 @@ function(doc){
 
 from couchdb.design import ViewDefinition as View
 users  = View('users','show',map_users)
-commissions = View('commissions','show',map_commissions)
-views = [users,commissions]
+commissions = View('commissions','fresh',map_commissions)
+finished = View('commissions','finished',map_finished)
+deleted = View('commissions','deleted',map_deleted)
+views = [users,commissions,finished,deleted]
 
 def view_sync():
   View.sync_many(db,views,remove_missing=True)

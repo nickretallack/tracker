@@ -4,7 +4,8 @@
 TODO:
   solf-delete that only shows for me
   'finished' state that also puts it in a different list.
-  upload images?
+  upload images to s3
+  make an admin filter
 
   -show summary in front page listing
   -give me a special view -- edit anything I guess
