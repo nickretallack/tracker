@@ -112,7 +112,7 @@ def commission_ish(record):
 class image_view:
   def GET(self, id, filename):
     from lib.S3save import s3_get_url
-    return "<img src='%s'>" % s3_get_url(id,filename)
+    return "<html><head><title>%s</title></head><body><img src='%s'></body></html>" % (filename,s3_get_url(id,filename))
 
 
 
