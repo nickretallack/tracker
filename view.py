@@ -78,13 +78,13 @@ def commission_ish(record):
 
   if params['button'] == "delete":
     if 'deleted' in record:
-      record['deleted'] = None
+      del record['deleted']
     else:
       record['deleted'] = make_timestamp()
     
   elif params['button'] == "finish":
     if 'finished' in record:
-      record['finished'] = None
+      del record['finished']
     else:
       record['finished'] = make_timestamp()
     
