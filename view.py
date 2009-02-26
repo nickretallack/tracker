@@ -71,7 +71,7 @@ def commission_ish(record):
   fields = ['price','summary','characters','mood','important','rating']
   params = web.input(button="new", file={})
 
-  if params['file'].value:
+  if params['file'] != {}:
     if not 'files' in record:
       record['files'] = {}
     record['files'][params['file'].filename] = True
@@ -104,9 +104,11 @@ def commission_ish(record):
     record_id = record.id
     db[record.id] = record
     
-  if params['file'].value:
+  if params['file'] != {}:
     from lib.S3save import s3_save
     s3_save(params['file'], record_id)
+    #print params['file'].filename
+    #print params['file'].value
 
 
 class image_view:

@@ -11,7 +11,7 @@ def s3_save(file,record_id):
   # quoted_url = quote(url.split('?',1)[0]) # remove query so it has a clean file extension on the end
   url = "%s/%s" % (record_id, file.filename)
   s3url = s3_url(url)
-  print s3.put(settings.s3_bucket, url, sendable, headers).message, s3url
+  s3.put(settings.s3_bucket, url, sendable, headers).message, s3url
   return s3url
   
 def s3_url(url):
